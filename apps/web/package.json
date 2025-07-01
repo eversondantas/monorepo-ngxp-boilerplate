@@ -1,0 +1,63 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "start": "echo '🚀 Iniciando servidor de desenvolvimento Angular...' && ng serve --host 0.0.0.0 --port 4200 --verbose",
+    "start:prod": "echo '🚀 Iniciando servidor de produção...' && ng serve --host 0.0.0.0 --port 4200 --configuration production",
+    "build": "echo '🔨 Construindo aplicação Angular...' && ng build --verbose",
+    "build:prod": "echo '🔨 Construindo para produção...' && ng build --configuration production --verbose",
+    "build:analyze": "echo '📊 Analisando bundle...' && ng build --configuration production --stats-json && npx webpack-bundle-analyzer dist/stats.json",
+    "test": "echo '🧪 Executando testes unitários...' && ng test --no-watch --browsers=ChromeHeadless",
+    "test:watch": "echo '👀 Executando testes em modo watch...' && ng test",
+    "test:coverage": "echo '📊 Executando testes com cobertura...' && ng test --no-watch --code-coverage --browsers=ChromeHeadless",
+    "lint": "echo '🔍 Analisando código Angular...' && ng lint",
+    "lint:fix": "echo '🔧 Corrigindo problemas automaticamente...' && ng lint --fix",
+    "e2e": "echo '🎭 Executando testes E2E...' && ng e2e",
+    "serve:dist": "echo '📦 Servindo build de produção...' && npx http-server dist -p 8080",
+    "clean": "echo '🧹 Limpando arquivos de build...' && rm -rf dist && rm -rf node_modules/.cache && rm -rf .angular/cache"
+  },
+  "dependencies": {
+    "@angular/animations": "^20.0.0",
+    "@angular/common": "^20.0.0",
+    "@angular/compiler": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@angular/forms": "^20.0.0",
+    "@angular/platform-browser": "^20.0.0",
+    "@angular/platform-browser-dynamic": "^20.0.0",
+    "@angular/router": "^20.0.0",
+    "rxjs": "~7.8.1",
+    "tslib": "^2.8.1",
+    "zone.js": "~0.14.10"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^20.0.4",
+    "@angular-eslint/builder": "^18.3.0",
+    "@angular-eslint/eslint-plugin": "^18.3.0",
+    "@angular-eslint/eslint-plugin-template": "^18.3.0",
+    "@angular-eslint/schematics": "^18.3.0",
+    "@angular-eslint/template-parser": "^18.3.0",
+    "@angular/cli": "^20.0.0",
+    "@angular/compiler-cli": "^20.0.0",
+    "@types/jasmine": "~5.1.4",
+    "@types/node": "^20.14.15",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "jasmine-core": "~5.2.0",
+    "karma": "~6.4.4",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.1",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.3.3",
+    "typescript": "~5.8.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

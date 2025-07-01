@@ -1,0 +1,35 @@
+{
+  "entryFile": "src/server.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": [
+    "src/controllers/**/*.controller.ts"
+  ],
+  "spec": {
+    "outputDirectory": "build",
+    "specVersion": 3,
+    "host": "localhost:3000",
+    "schemes": [
+      "http"
+    ],
+    "basePath": "/api/v1",
+    "info": {
+      "title": "Monorepo API",
+      "version": "1.0.0",
+      "description": "API for the Monorepo application with automatic Swagger generation"
+    },
+    "securityDefinitions": {},
+    "tags": [
+      {
+        "name": "Hello",
+        "description": "Hello World endpoints"
+      }
+    ]
+  },
+  "routes": {
+    "routesDir": "build"
+  },
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}

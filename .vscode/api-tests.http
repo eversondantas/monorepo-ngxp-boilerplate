@@ -1,0 +1,17 @@
+### Health Check
+GET http://localhost:3000/health
+
+### Hello World
+GET http://localhost:3000/hello
+
+### Personalized Hello
+GET http://localhost:3000/hello/John
+
+### Swagger JSON
+GET http://localhost:3000/api-docs
+
+### Test with variables
+@baseUrl = http://localhost:3000
+@name = Developer
+
+GET {{baseUrl}}/hello/{{name}}

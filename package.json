@@ -1,0 +1,45 @@
+{
+  "name": "monorepo-ngxp-boilerplate",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "echo '🔨 Construindo todos os projetos...' && npm run build --workspaces --verbose",
+    "build:api": "echo '🔨 Construindo API...' && npm run build -w api",
+    "build:web": "echo '🔨 Construindo Web App...' && npm run build -w web",
+    "build:swagger": "echo '📋 Gerando Swagger...' && npm run build:swagger -w api",
+    "start": "echo '🚀 Iniciando todos os serviços...' && npm run start --workspaces",
+    "start:api": "echo '🚀 Iniciando API...' && npm run start -w api",
+    "start:web": "echo '🚀 Iniciando Web App...' && npm run start -w web",
+    "dev": "echo '⚡ Iniciando desenvolvimento completo...' && concurrently -n \"API,WEB\" -c \"green,blue\" \"npm run dev -w api\" \"npm run start -w web\"",
+    "dev:api": "echo '⚡ Iniciando API em modo dev...' && npm run dev -w api",
+    "dev:web": "echo '⚡ Iniciando Web App em modo dev...' && npm run start -w web",
+    "test": "echo '🧪 Executando todos os testes...' && npm run test --workspaces",
+    "test:api": "echo '🧪 Testando API...' && npm run test -w api",
+    "test:web": "echo '🧪 Testando Web App...' && npm run test -w web",
+    "lint": "echo '🔍 Analisando código...' && npm run lint --workspaces",
+    "lint:fix": "echo '🔧 Corrigindo problemas de código...' && npm run lint:fix --workspaces",
+    "clean": "echo '🧹 Limpando arquivos de build...' && npm run clean --workspaces && rm -rf node_modules",
+    "install:clean": "echo '🧹 Limpeza completa e reinstalação...' && npm run clean && npm install",
+    "audit:security": "echo '🔒 Verificando vulnerabilidades...' && npm audit",
+    "audit:fix": "echo '🔒 Corrigindo vulnerabilidades...' && npm audit fix",
+    "postinstall": "echo '📦 Gerando Swagger da API...' && npm run build:swagger -w api"
+  },
+  "devDependencies": {
+    "@types/joi": "^17.2.2",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "joi": "^17.13.3",
+    "prettier": "^3.3.3",
+    "typescript": "^5.8.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

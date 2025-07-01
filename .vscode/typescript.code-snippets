@@ -1,0 +1,120 @@
+{
+    "TSOA Controller": {
+        "prefix": "tsoa-controller",
+        "body": [
+            "import { Controller, Get, Post, Route, Tags, Body, Path, Example, Response } from 'tsoa';",
+            "",
+            "export interface ${1:Model} {",
+            "  id: string;",
+            "  name: string;",
+            "  createdAt: string;",
+            "}",
+            "",
+            "@Route('${2:route}')  ",
+            "@Tags('${3:Tag}')",
+            "export class ${4:ModelController} extends Controller {",
+            "  /**",
+            "   * Retrieves all ${2:route}",
+            "   */",
+            "  @Get()",
+            "  @Response<${1:Model}[]>(200, 'Success')",
+            "  @Example<${1:Model}[]>([{",
+            "    id: '1',",
+            "    name: 'Example',",
+            "    createdAt: new Date().toISOString()",
+            "  }])",
+            "  public async get${4:ModelController}(): Promise<${1:Model}[]> {",
+            "    $0",
+            "    return [];",
+            "  }",
+            "}"
+        ],
+        "description": "Create a new TSOA controller with basic CRUD structure"
+    },
+    "TSOA Get Endpoint": {
+        "prefix": "tsoa-get",
+        "body": [
+            "/**",
+            " * ${1:Description}",
+            " */",
+            "@Get('${2:path}')",
+            "@Response<${3:ResponseType}>(200, 'Success')",
+            "@Example<${3:ResponseType}>({",
+            "  $4",
+            "})",
+            "public async ${5:methodName}(): Promise<${3:ResponseType}> {",
+            "  $0",
+            "}"
+        ],
+        "description": "Create a GET endpoint with TSOA decorators"
+    },
+    "TSOA Post Endpoint": {
+        "prefix": "tsoa-post",
+        "body": [
+            "/**",
+            " * ${1:Description}",
+            " * @param ${2:paramName} ${3:Parameter description}",
+            " */",
+            "@Post('${4:path}')",
+            "@Response<${5:ResponseType}>(201, 'Created')",
+            "@Response<ErrorResponse>(400, 'Bad Request')",
+            "@Example<${5:ResponseType}>({",
+            "  $6",
+            "})",
+            "public async ${7:methodName}(@Body() ${2:paramName}: ${8:RequestType}): Promise<${5:ResponseType}> {",
+            "  $0",
+            "}"
+        ],
+        "description": "Create a POST endpoint with TSOA decorators"
+    },
+    "Angular Service": {
+        "prefix": "ng-service",
+        "body": [
+            "import { Injectable } from '@angular/core';",
+            "import { HttpClient } from '@angular/common/http';",
+            "import { Observable } from 'rxjs';",
+            "",
+            "@Injectable({",
+            "  providedIn: 'root'",
+            "})",
+            "export class ${1:ServiceName}Service {",
+            "  private readonly baseUrl = 'http://localhost:3000';",
+            "",
+            "  constructor(private http: HttpClient) {}",
+            "",
+            "  ${2:methodName}(): Observable<${3:ReturnType}> {",
+            "    return this.http.get<${3:ReturnType}>(`\\${this.baseUrl}/${4:endpoint}`);",
+            "  }",
+            "  $0",
+            "}"
+        ],
+        "description": "Create an Angular service with HTTP client"
+    },
+    "Jest Test": {
+        "prefix": "jest-test",
+        "body": [
+            "describe('${1:TestSuite}', () => {",
+            "  beforeEach(() => {",
+            "    $2",
+            "  });",
+            "",
+            "  afterEach(() => {",
+            "    $3",
+            "  });",
+            "",
+            "  it('should ${4:test description}', async () => {",
+            "    // Arrange",
+            "    $5",
+            "",
+            "    // Act",
+            "    $6",
+            "",
+            "    // Assert",
+            "    expect($7).toBe($8);",
+            "    $0",
+            "  });",
+            "});"
+        ],
+        "description": "Create a Jest test suite"
+    }
+}

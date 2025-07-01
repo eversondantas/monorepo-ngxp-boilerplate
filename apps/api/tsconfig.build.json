@@ -1,0 +1,47 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "commonjs",
+        "lib": [
+            "ES2022",
+            "DOM"
+        ],
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "strict": false,
+        "noImplicitAny": false,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "resolveJsonModule": true,
+        "declaration": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "allowImportingTsExtensions": false,
+        "noEmitOnError": false,
+        "skipDefaultLibCheck": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "../../node_modules/@types"
+        ],
+        "types": [
+            "node",
+            "express",
+            "cors",
+            "swagger-ui-express"
+        ]
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build",
+        "**/*.test.ts",
+        "**/*.spec.ts"
+    ]
+}

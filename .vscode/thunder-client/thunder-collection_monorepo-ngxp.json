@@ -1,0 +1,62 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Monorepo NgXp API",
+    "dateExported": "2025-06-30T12:00:00.000Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "health-check",
+            "colId": "monorepo-ngxp",
+            "name": "Health Check",
+            "url": "{{baseUrl}}/health",
+            "method": "GET",
+            "sortNum": 10000,
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "hello-world",
+            "colId": "monorepo-ngxp",
+            "name": "Hello World",
+            "url": "{{baseUrl}}/hello",
+            "method": "GET",
+            "sortNum": 20000,
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.message",
+                    "action": "equal",
+                    "value": "Hello World"
+                }
+            ]
+        },
+        {
+            "_id": "hello-personalized",
+            "colId": "monorepo-ngxp",
+            "name": "Hello Personalized",
+            "url": "{{baseUrl}}/hello/{{name}}",
+            "method": "GET",
+            "sortNum": 30000,
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        }
+    ]
+}

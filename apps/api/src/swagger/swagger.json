@@ -1,0 +1,37 @@
+{
+  "swagger": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Monorepo API",
+      "version": "1.0.0",
+      "description": "API for the Monorepo application"
+    },
+    "paths": {
+      "/hello": {
+        "get": {
+          "summary": "Get Hello World message",
+          "responses": {
+            "200": {
+              "description": "A Hello World message",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "message": "Hello World"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

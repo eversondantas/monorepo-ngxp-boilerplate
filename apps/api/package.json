@@ -1,0 +1,51 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "scripts": {
+    "prebuild": "echo '📋 Preparando build...'",
+    "build": "echo '🔨 Compilando TypeScript...' && tsc",
+    "build:swagger": "echo '📋 Gerando documentação Swagger...' && tsoa spec-and-routes",
+    "start": "echo '🚀 Iniciando servidor de produção...' && node dist/server.js",
+    "dev": "echo '⚡ Iniciando em modo desenvolvimento...' && concurrently -n \"swagger,server\" -c \"blue,green\" \"npm run build:swagger -- --watch\" \"nodemon --verbose src/server.ts\"",
+    "dev:debug": "echo '🐛 Iniciando com debugger...' && nodemon --inspect --verbose src/server.ts",
+    "lint": "echo '🔍 Analisando código TypeScript...' && eslint . --ext .ts,.tsx",
+    "lint:fix": "echo '🔧 Corrigindo problemas automaticamente...' && eslint . --ext .ts,.tsx --fix",
+    "test": "echo '🧪 Executando testes Jest...' && jest --verbose",
+    "test:watch": "echo '👀 Executando testes em modo watch...' && jest --watch --verbose",
+    "test:coverage": "echo '📊 Executando testes com cobertura...' && jest --coverage --verbose",
+    "test:debug": "echo '🐛 Executando testes com debugger...' && node --inspect-brk node_modules/.bin/jest --runInBand",
+    "clean": "echo '🧹 Limpando arquivos de build...' && rm -rf dist && rm -rf build",
+    "logs": "echo '📄 Mostrando logs do servidor...' && tail -f logs/*.log || echo 'Nenhum log encontrado'"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "pg": "^8.12.0",
+    "reflect-metadata": "^0.2.2",
+    "swagger-ui-express": "^5.0.1",
+    "tsoa": "^6.6.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.23",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.15",
+    "@types/swagger-ui-express": "^4.1.6",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.3.3",
+    "ts-jest": "^29.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

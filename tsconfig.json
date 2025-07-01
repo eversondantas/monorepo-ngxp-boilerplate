@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@api/*": [
+                "apps/api/src/*"
+            ],
+            "@web/*": [
+                "apps/web/src/*"
+            ]
+        },
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
+    },
+    "references": [
+        {
+            "path": "./apps/api"
+        },
+        {
+            "path": "./apps/web"
+        }
+    ],
+    "files": [],
+    "include": []
+}

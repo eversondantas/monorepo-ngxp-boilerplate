@@ -1,0 +1,120 @@
+{
+    "folders": [
+        {
+            "name": "🏠 Root",
+            "path": "."
+        },
+        {
+            "name": "🔌 API",
+            "path": "./apps/api"
+        },
+        {
+            "name": "🌐 Web",
+            "path": "./apps/web"
+        }
+    ],
+    "settings": {
+        "typescript.preferences.importModuleSpecifier": "relative",
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "eslint.workingDirectories": [
+            "apps/api",
+            "apps/web"
+        ],
+        "search.exclude": {
+            "**/node_modules": true,
+            "**/dist": true,
+            "**/build": true,
+            "**/.git": true,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true
+        },
+        "files.watcherExclude": {
+            "**/node_modules/**": true,
+            "**/dist/**": true,
+            "**/build/**": true
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode-remote.remote-containers",
+            "github.copilot",
+            "github.copilot-chat",
+            "angular.ng-template",
+            "ms-vscode.vscode-typescript-next",
+            "esbenp.prettier-vscode",
+            "dbaeumer.vscode-eslint",
+            "eamodio.gitlens",
+            "ms-vscode.vscode-docker"
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "🚀 Start Development",
+                "type": "shell",
+                "command": "npm run dev",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new",
+                    "showReuseMessage": true,
+                    "clear": false
+                },
+                "runOptions": {
+                    "runOn": "folderOpen"
+                }
+            },
+            {
+                "label": "📚 Build Swagger",
+                "type": "shell",
+                "command": "npm run build:swagger -w api",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "silent",
+                    "focus": false,
+                    "panel": "shared"
+                }
+            },
+            {
+                "label": "🔧 Lint & Fix",
+                "type": "shell",
+                "command": "npm run lint:fix",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                }
+            },
+            {
+                "label": "🧪 Run Tests",
+                "type": "shell",
+                "command": "npm run test",
+                "group": "test",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                }
+            },
+            {
+                "label": "🐳 Start Database",
+                "type": "shell",
+                "command": "docker-compose -f docker-compose.dev.yml up -d",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                }
+            }
+        ]
+    }
+}
