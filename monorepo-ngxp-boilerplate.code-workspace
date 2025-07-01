@@ -16,6 +16,9 @@
     "settings": {
         "typescript.preferences.importModuleSpecifier": "relative",
         "typescript.updateImportsOnFileMove.enabled": "always",
+        "typescript.enablePromptUseWorkspaceTsdk": true,
+        "typescript.suggest.autoImports": true,
+        "typescript.suggest.paths": true,
         "eslint.workingDirectories": [
             "apps/api",
             "apps/web"
