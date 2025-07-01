@@ -1,0 +1,99 @@
+<div class="app-container">
+  <header class="app-header">
+    <h1>🚀 Monorepo NgXp Boilerplate</h1>
+    <p>Angular 20 + Node.js/Express + TypeScript</p>
+  </header>
+
+  <main class="app-main">
+    <section class="welcome-section">
+      <h2>Bem-vindo ao Projeto!</h2>
+      <p>Esta é uma aplicação Angular moderna conectada a uma API Node.js.</p>
+
+      <div class="api-section">
+        <h3>Teste da API</h3>
+        <div class="input-group">
+          <input
+            type="text"
+            [(ngModel)]="userName"
+            placeholder="Digite seu nome"
+            class="name-input"
+          />
+          <button (click)="callHelloAPI()" [disabled]="isLoading" class="call-api-btn">
+            {{ isLoading ? 'Carregando...' : 'Chamar API' }}
+          </button>
+        </div>
+
+        <div class="api-response" *ngIf="apiResponse">
+          <h4>Resposta da API:</h4>
+          <pre>{{ apiResponse | json }}</pre>
+        </div>
+
+        <div class="error-message" *ngIf="errorMessage">
+          <h4>Erro:</h4>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <h3>Funcionalidades</h3>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h4>🎯 TypeScript</h4>
+          <p>Desenvolvimento type-safe em toda a aplicação</p>
+        </div>
+
+        <div class="feature-card">
+          <h4>🚀 Angular 20</h4>
+          <p>Framework moderno com Ivy Renderer e performance otimizada</p>
+        </div>
+
+        <div class="feature-card">
+          <h4>🌐 API REST</h4>
+          <p>Backend Node.js/Express com documentação Swagger</p>
+        </div>
+
+        <div class="feature-card">
+          <h4>📦 Monorepo</h4>
+          <p>Estrutura organizada com workspaces NPM</p>
+        </div>
+
+        <div class="feature-card">
+          <h4>🔧 ESLint + Prettier</h4>
+          <p>Qualidade de código garantida</p>
+        </div>
+
+        <div class="feature-card">
+          <h4>🧪 Testes</h4>
+          <p>Jest para backend e Jasmine/Karma para frontend</p>
+        </div>
+
+        <div class="feature-card">
+          <h4>🐳 Docker</h4>
+          <p>Containerização para desenvolvimento e produção</p>
+        </div>
+
+        <div class="feature-card">
+          <h4>🎨 Responsive Design</h4>
+          <p>Interface adaptável para todos os dispositivos</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section">
+      <h3>Documentação</h3>
+      <div class="docs-links">
+        <a href="http://localhost:3000/docs" target="_blank" class="doc-link">
+          📚 API Documentation (Swagger)
+        </a>
+        <a href="/docs" class="doc-link">
+          📖 Project Documentation
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>&copy; 2025 Monorepo NgXp Boilerplate. Feito com ❤️</p>
+  </footer>
+</div>
