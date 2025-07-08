@@ -2,17 +2,21 @@ FROM node:20-alpine
 
 WORKDIR /usr/src/app
 
-# Copy package files
+# Copy package files for root and API workspace
 COPY package*.json ./
+COPY apps/api/package.json ./apps/api/package.json
 
-# Install dependencies
-RUN npm ci --only=production
+# Install production dependencies for the API workspace
+RUN npm ci --omit=dev --ignore-scripts --workspace=apps/api
 
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build only the API application
+RUN npm run build -w api
+
+# Set working directory to the API folder
+WORKDIR /usr/src/app/apps/api
 
 # Expose port
 EXPOSE 3000
@@ -21,5 +25,4 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:3000/health || exit 1
 
-# Start the application
-CMD ["node", "dist/server.js"]
+# Start the applicationCMD ["node", "dist/server.js"]

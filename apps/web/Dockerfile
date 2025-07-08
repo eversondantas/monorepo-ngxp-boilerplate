@@ -3,17 +3,18 @@ FROM node:20-alpine AS build
 
 WORKDIR /usr/src/app
 
-# Copy package files
+# Copy package files for root and Web workspace
 COPY package*.json ./
+COPY apps/web/package.json ./apps/web/package.json
 
-# Install dependencies
-RUN npm ci
+# Install dependencies for the Web workspace
+RUN npm ci --ignore-scripts --workspace=apps/web
 
 # Copy source code
 COPY . .
 
 # Build the application
-RUN npm run build:prod
+RUN npm run build:web
 
 # Production stage
 FROM nginx:alpine
@@ -22,7 +23,7 @@ FROM nginx:alpine
 COPY --from=build /usr/src/app/dist/web /usr/share/nginx/html
 
 # Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY apps/web/nginx.conf /etc/nginx/nginx.conf
 
 # Expose port
 EXPOSE 80
@@ -31,5 +32,4 @@ EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost/ || exit 1
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start nginxCMD ["nginx", "-g", "daemon off;"]
