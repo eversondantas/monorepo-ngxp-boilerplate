@@ -468,6 +468,9 @@ npm run test:api
 
 # Executar testes apenas do frontend
 npm run test:web
+# No DevContainer o Google Chrome já está instalado e a variável
+# de ambiente `CHROME_BIN` é configurada automaticamente para
+# permitir a execução de testes headless.
 
 # Executar testes com coverage detalhado
 npm run test:coverage

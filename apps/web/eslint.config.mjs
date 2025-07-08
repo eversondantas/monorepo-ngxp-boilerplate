@@ -10,7 +10,7 @@ export default [
   js.configs.recommended,
   {
     files: ['**/*.ts'],
-    ignores: ['**/*.spec.ts', 'dist/**/*', 'node_modules/**/*', 'src/environments/environment.prod.ts'],
+    ignores: ['**/*.spec.ts', 'dist/**/*', 'node_modules/**/*', 'src/environments/environment.prod.ts', 'src/test.ts'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
