@@ -123,6 +123,8 @@ npm run dev           # Ambos
 # Testes
 npm run test -w api
 npm run test -w web
+# Chrome já vem instalado no DevContainer e a variável
+# de ambiente CHROME_BIN está configurada automaticamente.
 
 # Linting
 npm run lint:fix
