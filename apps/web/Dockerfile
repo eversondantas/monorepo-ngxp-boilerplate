@@ -20,7 +20,7 @@ RUN npm run build:web
 FROM nginx:alpine
 
 # Copy built app to nginx
-COPY --from=build /usr/src/app/dist/web /usr/share/nginx/html
+COPY --from=build /usr/src/app/apps/web/dist /usr/share/nginx/html
 
 # Copy nginx configuration
 COPY apps/web/nginx.conf /etc/nginx/nginx.conf
@@ -31,5 +31,4 @@ EXPOSE 80
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost/ || exit 1
-
 # Start nginxCMD ["nginx", "-g", "daemon off;"]
