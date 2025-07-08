@@ -22,7 +22,6 @@ services:
     networks:
       - monorepo-network
 
-  # Optional: Redis for caching/sessions
   redis:
     image: redis:7-alpine
     container_name: monorepo-ngxp-redis
@@ -39,7 +38,71 @@ services:
     networks:
       - monorepo-network
 
-  # Optional: Adminer for database management
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: monorepo-ngxp-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - monorepo-network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: monorepo-ngxp-prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    networks:
+      - monorepo-network
+
+  loki:
+    image: grafana/loki:2.9.4
+    container_name: monorepo-ngxp-loki
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki_data:/loki
+    restart: unless-stopped
+    networks:
+      - monorepo-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: monorepo-ngxp-grafana
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+      - loki
+    volumes:
+      - grafana_data:/var/lib/grafana
+    restart: unless-stopped
+    networks:
+      - monorepo-network
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    container_name: monorepo-ngxp-jaeger
+    ports:
+      - "16686:16686"
+      - "6831:6831/udp"
+    restart: unless-stopped
+    networks:
+      - monorepo-network
+
   adminer:
     image: adminer:4
     container_name: monorepo-ngxp-adminer
@@ -57,6 +120,14 @@ volumes:
   postgres_data:
     driver: local
   redis_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  loki_data:
+    driver: local
+  grafana_data:
     driver: local
 
 networks:
