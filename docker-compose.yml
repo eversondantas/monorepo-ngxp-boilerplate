@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   api:
     build:
@@ -119,6 +121,7 @@ services:
     restart: unless-stopped
 
 volumes:
+
   postgres_data:    driver: local
   redis_data:
     driver: local
