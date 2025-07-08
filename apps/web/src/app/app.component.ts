@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +22,10 @@ export class AppComponent {
     this.errorMessage = '';
     this.apiResponse = null;
 
+    const baseUrl = environment.apiUrl;
     const url = this.userName
-      ? `http://localhost:3000/hello/${encodeURIComponent(this.userName)}`
-      : 'http://localhost:3000/hello';
+      ? `${baseUrl}/hello/${encodeURIComponent(this.userName)}`
+      : `${baseUrl}/hello`;
 
     this.http.get(url).subscribe({
       next: response => {
