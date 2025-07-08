@@ -3,7 +3,8 @@ FROM node:20-alpine
 WORKDIR /usr/src/app
 
 # Copy package files for root and API workspace
-COPY package*.json ./
+COPY package.json ./
+COPY package-lock.json ./
 COPY apps/api/package.json ./apps/api/package.json
 
 # Install dependencies for the API workspace

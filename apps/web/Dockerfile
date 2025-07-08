@@ -4,7 +4,8 @@ FROM node:20-alpine AS build
 WORKDIR /usr/src/app
 
 # Copy package files for root and Web workspace
-COPY package*.json ./
+COPY package.json ./
+COPY package-lock.json ./
 COPY apps/web/package.json ./apps/web/package.json
 
 # Install dependencies for the Web workspace
