@@ -8,8 +8,8 @@ COPY package.json ./
 COPY package-lock.json ./
 COPY apps/web/package.json ./apps/web/package.json
 
-# Install dependencies for the Web workspace
-RUN npm ci --ignore-scripts --workspace=apps/web
+# Install all dependencies (root and Web workspace)
+RUN npm ci --ignore-scripts
 
 # Copy source code
 COPY . .
@@ -31,5 +31,4 @@ EXPOSE 80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost/ || exit 1
-# Start nginxCMD ["nginx", "-g", "daemon off;"]
+  CMD curl -f http://localhost/ || exit 1# Start nginxCMD ["nginx", "-g", "daemon off;"]
