@@ -74,6 +74,13 @@ Ctrl+Shift+P (Cmd+Shift+P no Mac)
 | 3000 | API Express | http://localhost:3000 |
 | 4200 | Angular Dev | http://localhost:4200 |
 | 5432 | PostgreSQL | localhost:5432 |
+| 6379 | Redis | localhost:6379 |
+| 5672 | RabbitMQ | localhost:5672 |
+| 15672 | RabbitMQ UI | http://localhost:15672 |
+| 9090 | Prometheus | http://localhost:9090 |
+| 3001 | Grafana | http://localhost:3001 |
+| 3100 | Loki | http://localhost:3100 |
+| 16686 | Jaeger | http://localhost:16686 |
 | 8080 | Adminer DB | http://localhost:8080 |
 
 ## 🔥 Aliases úteis (terminal)
