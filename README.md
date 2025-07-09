@@ -558,6 +558,20 @@ export class UsersController extends Controller {
 - **Documentação Swagger**: <http://localhost:3000/api-docs>
 - **Health Check**: <http://localhost:3000/health>
 
+## 📈 Monitoramento e Serviços Adicionais
+
+O `docker-compose` agora provisiona serviços extras para observabilidade e fila/mensagem:
+
+- **Redis** (cache): `localhost:6379`
+- **RabbitMQ**: `localhost:5672` (UI em `http://localhost:15672`)
+- **Prometheus**: <http://localhost:9090>
+- **Grafana**: <http://localhost:3001>
+- **Loki**: <http://localhost:3100>
+- **Jaeger**: <http://localhost:16686>
+
+Esses componentes permitem coleta de métricas, logs e traces distribuídos.
+Para configurações avançadas consulte [docs/OBSERVABILIDADE.md](docs/OBSERVABILIDADE.md).
+
 ## 🔒 Segurança e Boas Práticas
 
 Este projeto implementa:
