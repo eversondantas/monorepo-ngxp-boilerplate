@@ -212,17 +212,17 @@ a:hover {
   text-decoration: none;
 }
 
-/* Stack Grid */
-.stack-grid {
+/* Services Grid */
+.services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
 
 .service-card {
-  background: #ffffff;
-  padding: 1.25rem;
+  background: #f8f9fa;
+  padding: 1.5rem;
   border-radius: 8px;
   border: 1px solid #e9ecef;
   text-align: center;
@@ -230,25 +230,48 @@ a:hover {
     transform 0.3s ease,
     box-shadow 0.3s ease;
   color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .service-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   text-decoration: none;
+  color: inherit;
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 .service-card h4 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #495057;
   font-weight: 600;
 }
 
 .service-card p {
-  margin: 0;
+  margin: 0 0 0.5rem 0;
   color: #6c757d;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.service-url {
+  font-size: 0.85rem;
+  color: #667eea;
+  font-weight: 500;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
 }
 
 /* Footer Styles */
@@ -290,12 +313,16 @@ a:hover {
     gap: 1rem;
   }
 
-  .stack-grid {
+  .services-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
   .feature-card {
+    padding: 1rem;
+  }
+
+  .service-card {
     padding: 1rem;
   }
 
