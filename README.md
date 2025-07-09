@@ -478,6 +478,9 @@ npm run test:api
 
 # Executar testes apenas do frontend
 npm run test:web
+# No DevContainer o Google Chrome já está instalado e a variável
+# de ambiente `CHROME_BIN` é configurada automaticamente para
+# permitir a execução de testes headless.
 
 # Executar testes com coverage detalhado
 npm run test:coverage
@@ -567,8 +570,7 @@ export class UsersController extends Controller {
 
 ## 📈 Monitoramento e Serviços Adicionais
 
-O `docker-compose` agora provisiona serviços extras para observabilidade e
-fila/mensagem:
+O `docker-compose` agora provisiona serviços extras para observabilidade e fila/mensagem:
 
 - **Redis** (cache): `localhost:6379`
 - **RabbitMQ**: `localhost:5672` (UI em `http://localhost:15672`)

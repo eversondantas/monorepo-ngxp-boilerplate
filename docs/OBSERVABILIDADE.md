@@ -1,7 +1,6 @@
 # Monitoramento e Observabilidade
 
-Este projeto inclui uma stack completa de monitoramento via **Grafana**,
-**Loki**, **Prometheus** e **Jaeger**.
+Este projeto inclui uma stack completa de monitoramento via **Grafana**, **Loki**, **Prometheus** e **Jaeger**.
 
 ## Serviços
 
