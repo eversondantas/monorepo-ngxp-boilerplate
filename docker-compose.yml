@@ -121,7 +121,8 @@ services:
     restart: unless-stopped
 
 volumes:
-  postgres_data:    driver: local
+  postgres_data:    
+    driver: local
   redis_data:
     driver: local
   rabbitmq_data:
@@ -132,4 +133,3 @@ volumes:
     driver: local
   grafana_data:
     driver: local
-
