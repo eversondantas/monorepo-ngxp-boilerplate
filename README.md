@@ -1,6 +1,10 @@
 # 🚀 Monorepo NgXp Boilerplate
 
-Um boilerplate moderno e otimizado para aplicações fullstack usando **Angular + Node.js/Express** com **TypeScript** e **TSOA**. Este projeto oferece uma configuração completa de **DevContainer** para desenvolvimento isolado e consistente, com scripts aprimorados para uma experiência de desenvolvimento superior.
+Um boilerplate moderno e otimizado para aplicações fullstack usando **Angular +
+Node.js/Express** com **TypeScript** e **TSOA**. Este projeto oferece uma
+configuração completa de **DevContainer** para desenvolvimento isolado e
+consistente, com scripts aprimorados para uma experiência de desenvolvimento
+superior.
 
 ## ✨ Características Principais
 
@@ -26,7 +30,8 @@ Um boilerplate moderno e otimizado para aplicações fullstack usando **Angular 
 
 ## 🐳 DevContainer (Recomendado)
 
-Este projeto inclui uma configuração completa de **DevContainer** para desenvolvimento isolado:
+Este projeto inclui uma configuração completa de **DevContainer** para
+desenvolvimento isolado:
 
 ### ✅ **Extensões VSCode Incluídas**
 
@@ -41,6 +46,7 @@ Este projeto inclui uma configuração completa de **DevContainer** para desenvo
 ### 🚀 **Configuração Rápida**
 
 1. **Instale as extensões necessárias:**
+
    - [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
    - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 
@@ -50,15 +56,16 @@ Este projeto inclui uma configuração completa de **DevContainer** para desenvo
    # Clone o repositório
    git clone <repository-url>
    cd monorepo-ngxp-boilerplate
-   
+
    # Abra no VSCode
    code .
-   
+
    # VSCode irá detectar o DevContainer e perguntar se quer reabrir no container
    # Ou use: Ctrl+Shift+P -> "Dev Containers: Reopen in Container"
    ```
 
-3. **Aguarde a configuração automática** (primeira vez pode demorar alguns minutos)
+3. **Aguarde a configuração automática** (primeira vez pode demorar alguns
+   minutos)
 
 4. **Pronto!** Ambiente totalmente configurado com:
    - Node.js 20, npm, Angular CLI
@@ -72,7 +79,7 @@ Este projeto inclui uma configuração completa de **DevContainer** para desenvo
 ```bash
 # Navegação
 api      # cd apps/api
-web      # cd apps/web  
+web      # cd apps/web
 root     # cd /workspace
 
 # npm shortcuts
@@ -143,7 +150,9 @@ monorepo-app/
 
 ## � Scripts e Comandos Disponíveis
 
-Este projeto possui scripts otimizados para uma experiência de desenvolvimento superior. Todos os comandos incluem feedback visual e verbosidade adequada para debugging.
+Este projeto possui scripts otimizados para uma experiência de desenvolvimento
+superior. Todos os comandos incluem feedback visual e verbosidade adequada para
+debugging.
 
 ### 🏗️ Build e Compilação
 
@@ -220,6 +229,7 @@ npm run dev
 O DevContainer oferece um ambiente isolado e consistente para desenvolvimento:
 
 1. **Instale as extensões necessárias no VS Code:**
+
    - [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
    - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 
@@ -569,8 +579,16 @@ O `docker-compose` agora provisiona serviços extras para observabilidade e fila
 - **Loki**: <http://localhost:3100>
 - **Jaeger**: <http://localhost:16686>
 
-Esses componentes permitem coleta de métricas, logs e traces distribuídos.
-Para configurações avançadas consulte [docs/OBSERVABILIDADE.md](docs/OBSERVABILIDADE.md).
+Esses componentes permitem coleta de métricas, logs e traces distribuídos. Para
+configurações avançadas consulte
+[docs/OBSERVABILIDADE.md](docs/OBSERVABILIDADE.md).
+
+### Nova seção na Interface Web
+
+A aplicação Angular possui agora uma “Seção de Serviços” com cards que
+direcionam para Grafana, Prometheus, Loki, Jaeger, Redis e RabbitMQ. Acesse
+<http://localhost:4200> e role até a nova seção para abrir rapidamente cada
+ferramenta.
 
 ## 🔒 Segurança e Boas Práticas
 
@@ -610,7 +628,8 @@ Utilizamos [Conventional Commits](https://conventionalcommits.org/):
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a **MIT License** - veja o arquivo LICENSE para detalhes.
+Este projeto está licenciado sob a **MIT License** - veja o arquivo LICENSE para
+detalhes.
 
 ## 🆘 Suporte
 
@@ -622,4 +641,5 @@ Este projeto está licenciado sob a **MIT License** - veja o arquivo LICENSE par
 
 > **Desenvolvido com ❤️ usando as melhores práticas de desenvolvimento moderno**
 >
-> *Este projeto é um boilerplate otimizado para desenvolvimento fullstack com TypeScript, Angular e Node.js*
+> _Este projeto é um boilerplate otimizado para desenvolvimento fullstack com
+> TypeScript, Angular e Node.js_

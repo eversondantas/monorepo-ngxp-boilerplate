@@ -121,7 +121,6 @@ services:
     restart: unless-stopped
 
 volumes:
-
   postgres_data:    
     driver: local
   redis_data:
