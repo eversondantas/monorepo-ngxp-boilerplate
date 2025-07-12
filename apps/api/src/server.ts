@@ -3,6 +3,9 @@ import express from 'express';
 import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
 import { HelloController } from './controllers/hello.controller';
+import { UserController } from './controllers/user.controller';
+import { RoleController } from './controllers/role.controller';
+import { runMigrations } from '@database/migrate';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +22,8 @@ app.get('/health', (_req, res) => {
 
 // Register manual routes
 const helloController = new HelloController();
+const userController = new UserController();
+const roleController = new RoleController();
 
 app.get('/hello', async (_req, res) => {
   try {
@@ -40,6 +45,17 @@ app.get('/hello/:name', async (req, res) => {
   }
 });
 
+// User routes
+app.post('/users', (req, res) => void userController.create(req, res));
+app.get('/users', (req, res) => void userController.list(req, res));
+app.get('/users/:id', (req, res) => void userController.get(req, res));
+app.put('/users/:id', (req, res) => void userController.update(req, res));
+app.delete('/users/:id', (req, res) => void userController.delete(req, res));
+
+// Role routes
+app.post('/roles', (req, res) => void roleController.create(req, res));
+app.get('/roles', (req, res) => void roleController.list(req, res));
+
 // Swagger UI setup
 try {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -50,11 +66,21 @@ try {
   console.warn('Swagger documentation not available.');
 }
 
+runMigrations().catch(err => console.error('Migration error', err));
+
 // 404 handler
 app.use((_req, res) => {
   res.status(404).json({
     message: 'Not Found',
-    availableEndpoints: ['/health', '/api-docs', '/hello', '/hello/{name}'],
+    availableEndpoints: [
+      '/health',
+      '/api-docs',
+      '/hello',
+      '/hello/{name}',
+      '/users',
+      '/users/{id}',
+      '/roles',
+    ],
   });
 });
 
