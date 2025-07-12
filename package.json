@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "libs/*"
   ],
   "scripts": {
     "build": "echo '🔨 Construindo todos os projetos...' && npm run build --workspaces --verbose",

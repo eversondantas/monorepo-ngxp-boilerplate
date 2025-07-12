@@ -7,6 +7,9 @@
             ],
             "@web/*": [
                 "apps/web/src/*"
+            ],
+            "@database/*": [
+                "libs/database/src/*"
             ]
         },
         "typeRoots": [
@@ -19,6 +22,9 @@
         },
         {
             "path": "./apps/web"
+        },
+        {
+            "path": "./libs/database"
         }
     ],
     "files": [],

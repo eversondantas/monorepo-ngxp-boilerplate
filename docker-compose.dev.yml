@@ -116,6 +116,20 @@ services:
     networks:
       - monorepo-network
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: monorepo-ngxp-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - monorepo-network
+
 volumes:
   postgres_data:
     driver: local
