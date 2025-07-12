@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express-serve-static-core';
 import { RoleRepository } from '@database/repositories/role.repository';
 
 const roleRepo = new RoleRepository();

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express-serve-static-core';
 import { UserRepository } from '@database/repositories/user.repository';
 import { UserService } from '../services/user.service';
 

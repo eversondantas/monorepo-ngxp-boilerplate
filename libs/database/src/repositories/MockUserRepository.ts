@@ -12,7 +12,7 @@ export class MockUserRepository implements IUserRepository {
       passwordHash: data.password,
       createdAt: new Date(),
       updatedAt: new Date(),
-    } as User;
+    } as unknown as User;
     this.users.push(user);
     return user;
   }

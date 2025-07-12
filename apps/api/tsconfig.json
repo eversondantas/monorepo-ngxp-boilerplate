@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "ES2022",
     "module": "commonjs",
-    "lib": [
-      "ES2022",
-      "DOM"
-    ],
+    "lib": ["ES2022"],
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
@@ -59,5 +57,10 @@
     "build",
     "**/*.test.ts",
     "**/*.spec.ts"
+  ],
+  "references": [
+    { "path": "../../libs/database" },
+    { "path": "../../libs/config" },
+    { "path": "../../libs/logger" }
   ]
 }

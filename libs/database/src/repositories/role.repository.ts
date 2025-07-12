@@ -2,7 +2,7 @@ import { Role } from '../entities/role.entity';
 
 export class RoleRepository {
   async create(data: { name: string }): Promise<Role> {
-    return Role.create({ name: data.name });
+    return Role.create({ name: data.name } as any);
   }
 
   async findAll(): Promise<Role[]> {

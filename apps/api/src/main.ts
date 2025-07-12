@@ -17,6 +17,7 @@ export async function bootstrap() {
   }
 }
 
+// eslint-disable-next-line no-undef
 if (require.main === module) {
-  bootstrap();
+  void bootstrap();
 }

@@ -11,7 +11,7 @@ export class UserRepository implements IUserRepository {
       email: data.email,
       passwordHash,
       roleId: data.roleId,
-    });
+    } as any);
   }
 
   async findAll(): Promise<User[]> {
@@ -25,11 +25,12 @@ export class UserRepository implements IUserRepository {
   async update(id: string, updates: Partial<CreateUserDTO>): Promise<User | null> {
     const user = await User.findByPk(id);
     if (!user) return null;
-    if (updates.password) {
-      updates = { ...updates, passwordHash: await hash(updates.password, 10) };
-      delete (updates as any).password;
+    const updateData: any = { ...updates };
+    if (updateData.password) {
+      updateData.passwordHash = await hash(updateData.password, 10);
+      delete updateData.password;
     }
-    await user.update(updates as any);
+    await user.update(updateData);
     return user.reload({ include: [Role] });
   }
 

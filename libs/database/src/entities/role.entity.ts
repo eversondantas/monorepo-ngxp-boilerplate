@@ -1,26 +1,39 @@
-import { Table, Column, Model, DataType, PrimaryKey, Default, AllowNull, Unique, CreatedAt, UpdatedAt, HasMany } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  PrimaryKey,
+  Default,
+  AllowNull,
+  Unique,
+  CreatedAt,
+  UpdatedAt,
+  HasMany,
+} from 'sequelize-typescript';
+import { InferAttributes, InferCreationAttributes } from 'sequelize';
 import { User } from './user.entity';
 
 @Table({ tableName: 'roles' })
-export class Role extends Model<Role> {
+export class Role extends Model<InferAttributes<Role>, InferCreationAttributes<Role>> {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  id!: string;
+  declare id: string;
 
   @AllowNull(false)
   @Unique
   @Column(DataType.STRING(50))
-  name!: string;
+  declare name: string;
 
   @CreatedAt
   @Column({ field: 'created_at' })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
   @Column({ field: 'updated_at' })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 
   @HasMany(() => User)
-  users?: User[];
+  declare users?: User[];
 }

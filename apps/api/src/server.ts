@@ -25,7 +25,9 @@ export function createApp() {
   const roleController = new RoleController();
 
   app.get('/hello', (_req, res) => res.json(helloController.getHello()));
-  app.get('/hello/:name', (req, res) => res.json(helloController.getPersonalizedHello(req.params.name)));
+  app.get('/hello/:name', (req, res) =>
+    res.json(helloController.getPersonalizedHello(req.params.name))
+  );
 
   app.post('/users', (req, res) => void userController.create(req, res));
   app.get('/users', (req, res) => void userController.list(req, res));
@@ -37,6 +39,7 @@ export function createApp() {
   app.get('/roles', (req, res) => void roleController.list(req, res));
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const swaggerDocument = require('../build/swagger.json');
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     console.log('Swagger UI available at http://localhost:' + PORT + '/api-docs');
