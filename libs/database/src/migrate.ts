@@ -1,19 +1,20 @@
-import { Sequelize } from 'sequelize-typescript';
+import { sequelize } from './connection';
 import { Umzug, SequelizeStorage } from 'umzug';
-import { initDatabase } from './database.module';
 import { resolve } from 'path';
+import { logger } from '@logger/index';
 
 export async function runMigrations(): Promise<void> {
-  const sequelize: Sequelize = await initDatabase();
+  await sequelize.authenticate();
 
   const umzug = new Umzug({
     migrations: { glob: resolve(__dirname, 'migrations/*.ts') },
     context: sequelize.getQueryInterface(),
     storage: new SequelizeStorage({ sequelize }),
-    logger: console,
+    logger,
   });
 
   await umzug.up();
+  logger.info('Migrations executed');
 }
 
 if (require.main === module) {

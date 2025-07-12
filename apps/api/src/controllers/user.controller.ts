@@ -1,22 +1,13 @@
 import { Request, Response } from 'express';
 import { UserRepository } from '@database/repositories/user.repository';
-import { initDatabase } from '@database/database.module';
+import { UserService } from '../services/user.service';
 
-const userRepo = new UserRepository();
-let dbInitialized = false;
-
-async function ensureDb() {
-  if (!dbInitialized) {
-    await initDatabase();
-    dbInitialized = true;
-  }
-}
+const service = new UserService(new UserRepository());
 
 export class UserController {
   async create(req: Request, res: Response) {
     try {
-      await ensureDb();
-      const user = await userRepo.create(req.body);
+      const user = await service.create(req.body);
       return res.status(201).json(user);
     } catch (err) {
       console.error(err);
@@ -26,8 +17,7 @@ export class UserController {
 
   async list(_req: Request, res: Response) {
     try {
-      await ensureDb();
-      const users = await userRepo.findAll();
+      const users = await service.findAll();
       return res.json(users);
     } catch (err) {
       console.error(err);
@@ -37,8 +27,7 @@ export class UserController {
 
   async get(req: Request, res: Response) {
     try {
-      await ensureDb();
-      const user = await userRepo.findById(req.params.id);
+      const user = await service.findById(req.params.id);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -51,8 +40,7 @@ export class UserController {
 
   async update(req: Request, res: Response) {
     try {
-      await ensureDb();
-      const user = await userRepo.update(req.params.id, req.body);
+      const user = await service.update(req.params.id, req.body);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -65,8 +53,7 @@ export class UserController {
 
   async delete(req: Request, res: Response) {
     try {
-      await ensureDb();
-      const ok = await userRepo.delete(req.params.id);
+      const ok = await service.delete(req.params.id);
       if (!ok) {
         return res.status(404).json({ message: 'User not found' });
       }

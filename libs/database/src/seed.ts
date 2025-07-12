@@ -1,4 +1,5 @@
-import { initDatabase, closeDatabase } from './database.module';
+import { initDatabase } from './init';
+import { closeDatabase } from './connection';
 import { RoleRepository } from './repositories/role.repository';
 import { UserRepository } from './repositories/user.repository';
 

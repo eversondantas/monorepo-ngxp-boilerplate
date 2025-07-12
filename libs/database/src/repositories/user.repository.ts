@@ -1,9 +1,10 @@
 import { User } from '../entities/user.entity';
 import { Role } from '../entities/role.entity';
 import { hash } from 'bcrypt';
+import { IUserRepository, CreateUserDTO } from './IUserRepository';
 
-export class UserRepository {
-  async create(data: { name: string; email: string; password: string; roleId: string }): Promise<User> {
+export class UserRepository implements IUserRepository {
+  async create(data: CreateUserDTO): Promise<User> {
     const passwordHash = await hash(data.password, 10);
     return User.create({
       name: data.name,
@@ -21,7 +22,7 @@ export class UserRepository {
     return User.findByPk(id, { include: [Role] });
   }
 
-  async update(id: string, updates: Partial<{ name: string; email: string; password: string; roleId: string }>): Promise<User | null> {
+  async update(id: string, updates: Partial<CreateUserDTO>): Promise<User | null> {
     const user = await User.findByPk(id);
     if (!user) return null;
     if (updates.password) {
