@@ -39,6 +39,12 @@ export default [
     },
   },
   {
+    files: ['**/__tests__/**/*.ts'],
+    languageOptions: {
+      globals: { jest: 'readonly', describe: 'readonly', it: 'readonly', expect: 'readonly' }
+    }
+  },
+  {
     files: ['**/*.{js,mjs}'],
     rules: {
       'no-undef': 'off',

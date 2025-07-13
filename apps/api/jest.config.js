@@ -16,5 +16,10 @@ module.exports = {
   coverageReporters: ['text', 'lcov', 'html'],
   setupFilesAfterEnv: ['<rootDir>/src/test/setup.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  moduleNameMapper: {
+    '^@database/(.*)$': '<rootDir>/../../libs/database/src/$1',
+    '^@config/(.*)$': '<rootDir>/../../libs/config/src/$1',
+    '^@logger/(.*)$': '<rootDir>/../../libs/logger/src/$1',
+  },
   verbose: true,
 };

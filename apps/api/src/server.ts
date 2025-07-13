@@ -2,11 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
-import createError, { HttpError } from 'http-errors';
+import createError from 'http-errors';
+import { sequelize } from '@database/connection';
 import { HelloController } from './controllers/hello.controller';
 import { UserController } from './controllers/user.controller';
 import { RoleController } from './controllers/role.controller';
 import { config } from '@config/index';
+import { errorHandler } from './middleware/errorHandler';
 
 /** Create and configure an Express application. */
 export function createApp() {
@@ -17,8 +19,13 @@ export function createApp() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  app.get('/health', (_req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  app.get('/health', async (_req, res) => {
+    try {
+      await sequelize.authenticate();
+      res.json({ status: 'ok', db: 'up', timestamp: new Date().toISOString() });
+    } catch {
+      res.status(503).json({ status: 'fail', db: 'down' });
+    }
   });
 
   const helloController = new HelloController();
@@ -30,14 +37,14 @@ export function createApp() {
     res.json(helloController.getPersonalizedHello(req.params.name))
   );
 
-  app.post('/users', (req, res) => void userController.create(req, res));
-  app.get('/users', (req, res) => void userController.list(req, res));
-  app.get('/users/:id', (req, res) => void userController.get(req, res));
-  app.put('/users/:id', (req, res) => void userController.update(req, res));
-  app.delete('/users/:id', (req, res) => void userController.delete(req, res));
+  app.post('/users', (req, res, next) => void userController.create(req, res, next));
+  app.get('/users', (req, res, next) => void userController.list(req, res, next));
+  app.get('/users/:id', (req, res, next) => void userController.get(req, res, next));
+  app.put('/users/:id', (req, res, next) => void userController.update(req, res, next));
+  app.delete('/users/:id', (req, res, next) => void userController.delete(req, res, next));
 
-  app.post('/roles', (req, res) => void roleController.create(req, res));
-  app.get('/roles', (req, res) => void roleController.list(req, res));
+  app.post('/roles', (req, res, next) => void roleController.create(req, res, next));
+  app.get('/roles', (req, res, next) => void roleController.list(req, res, next));
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -52,13 +59,7 @@ export function createApp() {
     next(createError(404, 'Not Found'));
   });
 
-  app.use((err: HttpError, _req: any, res: any, _next: any) => {
-    console.error(err);
-    res.status(err.status || 500).json({
-      message: err.message,
-      ...(config.app.nodeEnv === 'development' && { stack: err.stack }),
-    });
-  });
+  app.use(errorHandler);
 
   return app;
 }

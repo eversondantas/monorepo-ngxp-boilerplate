@@ -6,15 +6,15 @@ import { config } from '@config/index';
 export async function bootstrap() {
   try {
     await initDatabase();
-    const app = createApp();
-    const port = config.app.port;
-    app.listen(port, () => {
-      logger.info(`Server running on http://localhost:${port}`);
-    });
   } catch (err) {
-    logger.error({ err }, 'Failed to start server');
-    process.exit(1);
+    logger.error({ err }, 'Database unavailable, continuing without it');
   }
+
+  const app = createApp();
+  const port = config.app.port;
+  app.listen(port, () => {
+    logger.info(`Server running on http://localhost:${port}`);
+  });
 }
 
 void bootstrap();
