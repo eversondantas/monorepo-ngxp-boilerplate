@@ -9,6 +9,9 @@ import { UserController } from './controllers/user.controller';
 import { RoleController } from './controllers/role.controller';
 import { config } from '@config/index';
 import { errorHandler } from './middleware/errorHandler';
+import { validate } from './middleware/validate';
+import { createUserSchema, updateUserSchema } from './validators/user.validator';
+import { createRoleSchema } from './validators/role.validator';
 
 /** Create and configure an Express application. */
 export function createApp() {
@@ -37,13 +40,25 @@ export function createApp() {
     res.json(helloController.getPersonalizedHello(req.params.name))
   );
 
-  app.post('/users', (req, res, next) => void userController.create(req, res, next));
+  app.post(
+    '/users',
+    validate(createUserSchema),
+    (req, res, next) => void userController.create(req, res, next)
+  );
   app.get('/users', (req, res, next) => void userController.list(req, res, next));
   app.get('/users/:id', (req, res, next) => void userController.get(req, res, next));
-  app.put('/users/:id', (req, res, next) => void userController.update(req, res, next));
+  app.put(
+    '/users/:id',
+    validate(updateUserSchema),
+    (req, res, next) => void userController.update(req, res, next)
+  );
   app.delete('/users/:id', (req, res, next) => void userController.delete(req, res, next));
 
-  app.post('/roles', (req, res, next) => void roleController.create(req, res, next));
+  app.post(
+    '/roles',
+    validate(createRoleSchema),
+    (req, res, next) => void roleController.create(req, res, next)
+  );
   app.get('/roles', (req, res, next) => void roleController.list(req, res, next));
 
   try {

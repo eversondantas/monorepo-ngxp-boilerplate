@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express-serve-static-core';
 import { Schema } from 'joi';
 
 export function validate(schema: Schema) {

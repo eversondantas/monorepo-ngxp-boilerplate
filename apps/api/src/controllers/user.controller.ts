@@ -1,17 +1,12 @@
 import type { Request, Response, NextFunction } from 'express-serve-static-core';
 import { UserRepository } from '@database/repositories/user.repository';
 import { UserService } from '../services/user.service';
-import { createUserSchema, updateUserSchema } from '../validators/user.validator';
 import { ApiError } from '../errors/ApiError';
 
 const service = new UserService(new UserRepository());
 
 export class UserController {
   async create(req: Request, res: Response, next: NextFunction) {
-    const { error } = createUserSchema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ message: error.message });
-    }
     try {
       const user = await service.create(req.body);
       return res.status(201).json(user);
@@ -42,10 +37,6 @@ export class UserController {
   }
 
   async update(req: Request, res: Response, next: NextFunction) {
-    const { error } = updateUserSchema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ message: error.message });
-    }
     try {
       const user = await service.update(req.params.id, req.body);
       if (!user) {

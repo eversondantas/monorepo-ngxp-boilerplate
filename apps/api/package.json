@@ -25,7 +25,8 @@
     "http-errors": "^1.8.1",
     "reflect-metadata": "^0.2.2",
     "swagger-ui-express": "^5.0.1",
-    "tsoa": "^6.6.0"
+    "tsoa": "^6.6.0",
+    "joi": "^17.11.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
@@ -45,7 +46,8 @@
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.0",
-    "@types/http-errors": "^1.8.2"
+    "@types/http-errors": "^1.8.2",
+    "@types/joi": "^17.2.3"
   },
   "engines": {
     "node": ">=20.0.0"
