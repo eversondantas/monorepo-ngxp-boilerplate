@@ -2,16 +2,18 @@ import { User } from '../entities/user.entity';
 import { Role } from '../entities/role.entity';
 import { hash } from 'bcrypt';
 import { IUserRepository, CreateUserDTO } from './IUserRepository';
+import type { InferCreationAttributes } from 'sequelize';
 
 export class UserRepository implements IUserRepository {
   async create(data: CreateUserDTO): Promise<User> {
     const passwordHash = await hash(data.password, 10);
-    return User.create({
+    const attributes: InferCreationAttributes<User> = {
       name: data.name,
       email: data.email,
       passwordHash,
       roleId: data.roleId,
-    } as any);
+    };
+    return User.create(attributes);
   }
 
   async findAll(): Promise<User[]> {
@@ -25,10 +27,11 @@ export class UserRepository implements IUserRepository {
   async update(id: string, updates: Partial<CreateUserDTO>): Promise<User | null> {
     const user = await User.findByPk(id);
     if (!user) return null;
-    const updateData: any = { ...updates };
-    if (updateData.password) {
-      updateData.passwordHash = await hash(updateData.password, 10);
-      delete updateData.password;
+    const updateData: Partial<InferCreationAttributes<User>> = {
+      ...updates,
+    } as Partial<InferCreationAttributes<User>>;
+    if ('password' in updates && updates.password) {
+      (updateData as { passwordHash?: string }).passwordHash = await hash(updates.password, 10);
     }
     await user.update(updateData);
     return user.reload({ include: [Role] });

@@ -3,7 +3,5 @@ export interface OrmConfig {
 }
 
 export const ormConfig: OrmConfig = {
-  url:
-    process.env.DATABASE_URL ||
-    'postgres://user:password@localhost:5432/mydatabase',
+  url: process.env.DATABASE_URL || 'postgres://user:password@localhost:5432/mydatabase',
 };

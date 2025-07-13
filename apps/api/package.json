@@ -6,7 +6,7 @@
     "prebuild": "echo '📋 Preparando build...'",
     "build": "echo '🔨 Compilando TypeScript...' && tsc",
     "build:swagger": "echo '📋 Gerando documentação Swagger...' && tsoa spec-and-routes",
-    "start": "echo '🚀 Iniciando servidor de produção...' && node -r tsconfig-paths/register dist/server.js",
+    "start": "echo '🚀 Iniciando servidor de produção...' && node -r tsconfig-paths/register dist/main.js",
     "dev": "echo '⚡ Iniciando em modo desenvolvimento...' && concurrently -n \"swagger,server\" -c \"blue,green\" \"npm run build:swagger -- --watch\" \"nodemon\"",
     "dev:debug": "echo '🐛 Iniciando com debugger...' && nodemon --inspect",
     "lint": "echo '🔍 Analisando código TypeScript...' && eslint . --ext .ts,.tsx",

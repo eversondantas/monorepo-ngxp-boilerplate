@@ -10,7 +10,7 @@ export async function initDatabase(): Promise<void> {
   try {
     await sequelize.authenticate();
     const umzug = new Umzug({
-      migrations: { glob: resolve(__dirname, 'migrations/*.ts') },
+      migrations: { glob: resolve(process.cwd(), 'libs/database/src/migrations/*.ts') },
       context: sequelize.getQueryInterface(),
       storage: new SequelizeStorage({ sequelize }),
       logger,

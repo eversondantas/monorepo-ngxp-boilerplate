@@ -20,8 +20,6 @@ export const sequelize = new Sequelize({
 });
 
 sequelize.addModels(Object.values(Entities));
-
-
 /** Close the database connection. */
 export async function closeDatabase(): Promise<void> {
   await sequelize.close();

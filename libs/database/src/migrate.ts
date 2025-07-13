@@ -7,7 +7,7 @@ export async function runMigrations(): Promise<void> {
   await sequelize.authenticate();
 
   const umzug = new Umzug({
-    migrations: { glob: resolve(__dirname, 'migrations/*.ts') },
+    migrations: { glob: resolve(process.cwd(), 'libs/database/src/migrations/*.ts') },
     context: sequelize.getQueryInterface(),
     storage: new SequelizeStorage({ sequelize }),
     logger,
@@ -15,11 +15,4 @@ export async function runMigrations(): Promise<void> {
 
   await umzug.up();
   logger.info('Migrations executed');
-}
-
-if (require.main === module) {
-  runMigrations().catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
 }
