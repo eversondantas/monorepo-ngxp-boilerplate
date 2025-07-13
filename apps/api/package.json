@@ -4,7 +4,7 @@
   "main": "dist/server.js",
   "scripts": {
     "prebuild": "echo '📋 Preparando build...'",
-    "build": "echo '🔨 Compilando TypeScript...' && tsc",
+    "build": "echo '🔨 Compilando TypeScript...' && tsc -b",
     "build:swagger": "echo '📋 Gerando documentação Swagger...' && tsoa spec-and-routes",
     "start": "echo '🚀 Iniciando servidor de produção...' && node -r tsconfig-paths/register dist/main.js",
     "dev": "echo '⚡ Iniciando em modo desenvolvimento...' && concurrently -n \"swagger,server\" -c \"blue,green\" \"npm run build:swagger -- --watch\" \"nodemon\"",

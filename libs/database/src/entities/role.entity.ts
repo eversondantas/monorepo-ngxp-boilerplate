@@ -11,7 +11,7 @@ import {
   UpdatedAt,
   HasMany,
 } from 'sequelize-typescript';
-import { InferAttributes, InferCreationAttributes } from 'sequelize';
+import { InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 import { User } from './user.entity';
 
 @Table({ tableName: 'roles' })
@@ -19,7 +19,7 @@ export class Role extends Model<InferAttributes<Role>, InferCreationAttributes<R
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  declare id: string;
+  declare id: CreationOptional<string>;
 
   @AllowNull(false)
   @Unique
@@ -28,11 +28,11 @@ export class Role extends Model<InferAttributes<Role>, InferCreationAttributes<R
 
   @CreatedAt
   @Column({ field: 'created_at' })
-  declare createdAt: Date;
+  declare createdAt: CreationOptional<Date>;
 
   @UpdatedAt
   @Column({ field: 'updated_at' })
-  declare updatedAt: Date;
+  declare updatedAt: CreationOptional<Date>;
 
   @HasMany(() => User)
   declare users?: User[];

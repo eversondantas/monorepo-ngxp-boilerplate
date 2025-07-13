@@ -12,7 +12,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { InferAttributes, InferCreationAttributes } from 'sequelize';
+import { InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 import { Role } from './role.entity';
 
 @Table({ tableName: 'users' })
@@ -20,7 +20,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  declare id: string;
+  declare id: CreationOptional<string>;
 
   @AllowNull(false)
   @Column(DataType.STRING(100))
@@ -44,9 +44,9 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
 
   @CreatedAt
   @Column({ field: 'created_at' })
-  declare createdAt: Date;
+  declare createdAt: CreationOptional<Date>;
 
   @UpdatedAt
   @Column({ field: 'updated_at' })
-  declare updatedAt: Date;
+  declare updatedAt: CreationOptional<Date>;
 }

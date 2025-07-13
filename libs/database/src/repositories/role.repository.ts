@@ -1,10 +1,8 @@
 import { Role } from '../entities/role.entity';
-import type { InferCreationAttributes } from 'sequelize';
 
 export class RoleRepository {
   async create(data: { name: string }): Promise<Role> {
-    const attrs: InferCreationAttributes<Role> = { name: data.name };
-    return Role.create(attrs);
+    return Role.create({ name: data.name });
   }
 
   async findAll(): Promise<Role[]> {
