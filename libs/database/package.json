@@ -7,7 +7,9 @@
     "build": "tsc -p tsconfig.json",
     "migrate": "ts-node src/migrate.ts",
     "seed": "ts-node src/seed.ts",
-    "test": "echo \"no tests\""
+    "test": "echo \"no tests\"",
+    "lint": "echo '🔍 Analisando código...' && eslint src --ext .ts",
+    "lint:fix": "echo '🔧 Corrigindo problemas...' && eslint src --ext .ts --fix"
   },
   "dependencies": {
     "sequelize": "^6.37.7",

@@ -1,3 +1,4 @@
+/* eslint-env node */
 import dotenvFlow from 'dotenv-flow';
 
 dotenvFlow.config();

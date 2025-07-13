@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
+import createError, { HttpError } from 'http-errors';
 import { HelloController } from './controllers/hello.controller';
 import { UserController } from './controllers/user.controller';
 import { RoleController } from './controllers/role.controller';
@@ -47,14 +48,14 @@ export function createApp() {
     console.warn('Swagger documentation not available.');
   }
 
-  app.use((_req, res) => {
-    res.status(404).json({ message: 'Not Found' });
+  app.use((_req, _res, next) => {
+    next(createError(404, 'Not Found'));
   });
 
-  app.use((err: Error & { status?: number }, _req: any, res: any, _next: any) => {
+  app.use((err: HttpError, _req: any, res: any, _next: any) => {
     console.error(err);
     res.status(err.status || 500).json({
-      message: err.message || 'Internal Server Error',
+      message: err.message,
       ...(config.app.nodeEnv === 'development' && { stack: err.stack }),
     });
   });

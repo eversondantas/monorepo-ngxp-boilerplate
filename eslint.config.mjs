@@ -13,9 +13,12 @@ export default [
       parserOptions: {
         ecmaVersion: 2022,
         sourceType: 'module',
-        project: ['./apps/*/tsconfig.json'],
+        project: ['./apps/*/tsconfig.json', './libs/*/tsconfig.json'],
         tsconfigRootDir: import.meta.dirname,
       },
+      globals: {
+        process: 'readonly'
+      }
     },
     plugins: {
       '@typescript-eslint': tseslint,
