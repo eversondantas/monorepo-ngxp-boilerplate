@@ -13,9 +13,12 @@ export default [
       parserOptions: {
         ecmaVersion: 2022,
         sourceType: 'module',
-        project: ['./apps/*/tsconfig.json'],
+        project: ['./apps/*/tsconfig.json', './libs/*/tsconfig.json'],
         tsconfigRootDir: import.meta.dirname,
       },
+      globals: {
+        process: 'readonly'
+      }
     },
     plugins: {
       '@typescript-eslint': tseslint,
@@ -34,6 +37,12 @@ export default [
       'prefer-const': 'error',
       'no-var': 'error',
     },
+  },
+  {
+    files: ['**/__tests__/**/*.ts'],
+    languageOptions: {
+      globals: { jest: 'readonly', describe: 'readonly', it: 'readonly', expect: 'readonly' }
+    }
   },
   {
     files: ['**/*.{js,mjs}'],

@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "ES2022",
     "module": "commonjs",
-    "lib": [
-      "ES2022",
-      "DOM"
-    ],
+    "lib": ["ES2022"],
     "outDir": "./dist",
     "rootDir": "./src",
-    "strict": false,
+    "strict": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -31,6 +29,15 @@
     "paths": {
       "*": [
         "node_modules/*"
+      ],
+      "@database/*": [
+        "libs/database/src/*"
+      ],
+      "@config/*": [
+        "libs/config/src/*"
+      ],
+      "@logger/*": [
+        "libs/logger/src/*"
       ]
     },
     "types": [
@@ -50,5 +57,10 @@
     "build",
     "**/*.test.ts",
     "**/*.spec.ts"
+  ],
+  "references": [
+    { "path": "../../libs/database" },
+    { "path": "../../libs/config" },
+    { "path": "../../libs/logger" }
   ]
 }

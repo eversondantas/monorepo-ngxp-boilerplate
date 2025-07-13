@@ -1,12 +1,22 @@
 {
     "compilerOptions": {
         "baseUrl": "./",
+        "strict": true,
         "paths": {
             "@api/*": [
                 "apps/api/src/*"
             ],
             "@web/*": [
                 "apps/web/src/*"
+            ],
+            "@database/*": [
+                "libs/database/src/*"
+            ],
+            "@config/*": [
+                "libs/config/src/*"
+            ],
+            "@logger/*": [
+                "libs/logger/src/*"
             ]
         },
         "typeRoots": [
@@ -19,6 +29,15 @@
         },
         {
             "path": "./apps/web"
+        },
+        {
+            "path": "./libs/database"
+        },
+        {
+            "path": "./libs/config"
+        },
+        {
+            "path": "./libs/logger"
         }
     ],
     "files": [],

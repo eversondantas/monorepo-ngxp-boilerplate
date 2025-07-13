@@ -1,0 +1,20 @@
+import { createApp } from './server';
+import { initDatabase } from '@database/init';
+import { logger } from '@logger/index';
+import { config } from '@config/index';
+
+export async function bootstrap() {
+  try {
+    await initDatabase();
+  } catch (err) {
+    logger.error({ err }, 'Database unavailable, continuing without it');
+  }
+
+  const app = createApp();
+  const port = config.app.port;
+  app.listen(port, () => {
+    logger.info(`Server running on http://localhost:${port}`);
+  });
+}
+
+void bootstrap();
