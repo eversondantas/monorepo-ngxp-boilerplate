@@ -1,18 +1,18 @@
+import { CreationOptional, InferAttributes, InferCreationAttributes } from 'sequelize';
 import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  PrimaryKey,
-  Default,
-  AllowNull,
-  Unique,
-  CreatedAt,
-  UpdatedAt,
-  ForeignKey,
-  BelongsTo,
+    AllowNull,
+    BelongsTo,
+    Column,
+    CreatedAt,
+    DataType,
+    Default,
+    ForeignKey,
+    Model,
+    PrimaryKey,
+    Table,
+    Unique,
+    UpdatedAt,
 } from 'sequelize-typescript';
-import { InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 import { Role } from './role.entity';
 
 @Table({ tableName: 'users' })
@@ -43,10 +43,16 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   declare role?: Role;
 
   @CreatedAt
-  @Column({ field: 'created_at' })
+  @Column({
+    type: DataType.DATE,
+    field: 'created_at',
+  })
   declare createdAt: CreationOptional<Date>;
 
   @UpdatedAt
-  @Column({ field: 'updated_at' })
+  @Column({
+    type: DataType.DATE,
+    field: 'updated_at',
+  })
   declare updatedAt: CreationOptional<Date>;
 }
