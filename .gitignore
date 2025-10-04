@@ -90,3 +90,6 @@ apps/web/.angular/
 
 # DevContainer
 .devcontainer/.env
+.env.development
+.env.production
+.env.test

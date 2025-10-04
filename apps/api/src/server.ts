@@ -1,75 +1,69 @@
+import { sequelize } from '@database/connection';
+import { logger } from '@logger/index';
 import cors from 'cors';
 import express from 'express';
 import 'reflect-metadata';
-import swaggerUi from 'swagger-ui-express';
+import { DatabaseUserController } from './controllers/database-user.controller';
 import { HelloController } from './controllers/hello.controller';
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+export function createApp() {
+  const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
-// Health check endpoint
-app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
-});
+  // Health check endpoint with database connection
+  app.get('/health', async (_req, res) => {
+    try {
+      await sequelize.authenticate();
+      res.status(200).send({
+        status: 'ok',
+        db: 'connected',
+        timestamp: new Date().toISOString(),
+        version: '1.0.0',
+        environment: process.env.NODE_ENV || 'development',
+      });
+    } catch (error) {
+      logger.error({ error }, 'Database connection failed');
+      res.status(503).send({
+        status: 'error',
+        db: 'disconnected',
+        timestamp: new Date().toISOString(),
+      });
+    }
+  });
 
-// Register manual routes
-const helloController = new HelloController();
+  // Hello endpoints
+  const helloController = new HelloController();
+  app.get('/hello', (_req, res) => res.json(helloController.getHello()));
+  app.get('/hello/:name', (req, res) =>
+    res.json(helloController.getPersonalizedHello(req.params.name))
+  );
 
-app.get('/hello', async (_req, res) => {
-  try {
-    const result = helloController.getHello();
-    res.json(result);
-  } catch (error) {
-    console.error('Error in /hello:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+  // Database-integrated user endpoints
+  const userController = new DatabaseUserController();
+  app.post('/users', (req, res, next) => void userController.create(req, res, next));
+  app.get('/users', (req, res, next) => void userController.list(req, res, next));
+  app.get('/users/:id', (req, res, next) => void userController.get(req, res, next));
+  app.put('/users/:id', (req, res, next) => void userController.update(req, res, next));
+  app.delete('/users/:id', (req, res, next) => void userController.delete(req, res, next));
 
-app.get('/hello/:name', async (req, res) => {
-  try {
-    const result = helloController.getPersonalizedHello(req.params.name);
-    res.json(result);
-  } catch (error) {
-    console.error('Error in /hello/:name:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
+  // Simple error handler
+  app.use((_req, _res, next) => {
+    const error = {
+      status: 404,
+      message: 'Not Found',
+    };
+    next(error);
+  });
 
-// Swagger UI setup
-try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const swaggerDocument = require('../build/swagger.json');
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  console.log('Swagger UI available at http://localhost:' + PORT + '/api-docs');
-} catch {
-  console.warn('Swagger documentation not available.');
+  app.use((err: any, _req: any, res: any, _next: any) => {
+    logger.error({ err });
+    res.status(err.status || 500).json({
+      message: err.message || 'Internal Server Error',
+    });
+  });
+
+  return app;
 }
-
-// 404 handler
-app.use((_req, res) => {
-  res.status(404).json({
-    message: 'Not Found',
-    availableEndpoints: ['/health', '/api-docs', '/hello', '/hello/{name}'],
-  });
-});
-
-// Error handler
-app.use((err: Error & { status?: number }, _req: any, res: any, _next: any) => {
-  console.error(err);
-  res.status(err.status || 500).json({
-    message: err.message || 'Internal Server Error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
-});
-
-export default app;

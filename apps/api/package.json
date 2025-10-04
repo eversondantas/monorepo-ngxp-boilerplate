@@ -4,11 +4,11 @@
   "main": "dist/server.js",
   "scripts": {
     "prebuild": "echo '📋 Preparando build...'",
-    "build": "echo '🔨 Compilando TypeScript...' && tsc",
+    "build": "echo '🔨 Compilando TypeScript...' && tsc -b",
     "build:swagger": "echo '📋 Gerando documentação Swagger...' && tsoa spec-and-routes",
-    "start": "echo '🚀 Iniciando servidor de produção...' && node dist/server.js",
-    "dev": "echo '⚡ Iniciando em modo desenvolvimento...' && concurrently -n \"swagger,server\" -c \"blue,green\" \"npm run build:swagger -- --watch\" \"nodemon --verbose src/server.ts\"",
-    "dev:debug": "echo '🐛 Iniciando com debugger...' && nodemon --inspect --verbose src/server.ts",
+    "start": "echo '🚀 Iniciando servidor de produção...' && node -r tsconfig-paths/register dist/main.js",
+    "dev": "echo '⚡ Iniciando em modo desenvolvimento...' && concurrently -n \"swagger,server\" -c \"blue,green\" \"npm run build:swagger -- --watch\" \"nodemon\"",
+    "dev:debug": "echo '🐛 Iniciando com debugger...' && nodemon --inspect",
     "lint": "echo '🔍 Analisando código TypeScript...' && eslint . --ext .ts,.tsx",
     "lint:fix": "echo '🔧 Corrigindo problemas automaticamente...' && eslint . --ext .ts,.tsx --fix",
     "test": "echo '🧪 Executando testes Jest...' && jest --verbose",
@@ -21,6 +21,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "joi": "^17.11.0",
     "pg": "^8.12.0",
     "reflect-metadata": "^0.2.2",
     "swagger-ui-express": "^5.0.1",
@@ -30,6 +31,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^4.17.23",
     "@types/jest": "^29.5.12",
+    "@types/joi": "^17.2.3",
     "@types/node": "^20.14.15",
     "@types/swagger-ui-express": "^4.1.6",
     "@typescript-eslint/eslint-plugin": "^8.15.0",
@@ -43,6 +45,7 @@
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.0"
   },
   "engines": {

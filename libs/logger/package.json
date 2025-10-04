@@ -1,0 +1,17 @@
+{
+  "name": "@libs/logger",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "echo '🔍 Analisando código...' && eslint src --ext .ts",
+    "lint:fix": "echo '🔧 Corrigindo problemas...' && eslint src --ext .ts --fix"
+  },
+  "dependencies": {
+    "pino": "^8.17.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}

@@ -1,32 +1,196 @@
-# 🚀 Monorepo NgXp Boilerplate
+# 🚀 NGXP Full-Stack Starter Kit
 
-Um boilerplate moderno e otimizado para aplicações fullstack usando **Angular +
-Node.js/Express** com **TypeScript** e **TSOA**. Este projeto oferece uma
-configuração completa de **DevContainer** para desenvolvimento isolado e
-consistente, com scripts aprimorados para uma experiência de desenvolvimento
-superior.
+**Stack completa Angular + Node.js + Express + PostgreSQL para desenvolvimento moderno**
 
-## ✨ Características Principais
+## 📋 Pré-requisitos
 
-- 🎯 **Monorepo** com npm workspaces para gerenciamento eficiente
-- 🔧 **Scripts otimizados** com verbosidade ideal para desenvolvimento
-- 🛡️ **Segurança** atualizada com vulnerabilidades corrigidas
-- 📚 **Documentação** automática com Swagger/OpenAPI
-- 🐳 **DevContainer** com ambiente completo pré-configurado
-- 🎨 **Linting e formatação** consistentes em todo o projeto
-- 🧪 **Testes** configurados para API e frontend
-- ⚡ **Hot reload** para desenvolvimento rápido
+- Node.js 18+
+- npm ou yarn
+- Docker & Docker Compose
+- Git
 
-## 🚀 Tecnologias Atualizadas
+## 🚀 Quick Start
 
-- **Node.js**: 20.x LTS (npm 11.4.2)
-- **TypeScript**: 5.8.x (atualizado)
-- **Express**: 4.19.2 + TSOA 6.4.0
-- **Angular**: 20.x (atualizado para versão mais recente)
-- **PostgreSQL**: 16 + Redis 7
-- **ESLint**: 9.x + Prettier 3.x (configuração moderna)
-- **Docker**: DevContainer + Docker Compose
-- **Jest**: 29.x para testes da API
+### 1. Configuração Inicial
+
+```bash
+# Clone o repositório
+git clone <repo-url>
+cd monorepo-ngxp-boilerplate
+
+# Instale as dependências
+npm install
+
+# Configure as variáveis de ambiente
+cp .env.example .env
+# Edite o arquivo .env com suas configurações
+```
+
+### 2. Desenvolvimento
+
+```bash
+# Inicie o banco de dados
+docker-compose up -d db
+
+# Execute as migrações (quando disponível)
+# npm run db:migrate
+
+# Inicie o ambiente de desenvolvimento
+npm run dev
+```
+
+Isso iniciará:
+
+- �️ **Frontend Angular** em `http://localhost:4200`
+- 🟢 **API Backend** em `http://localhost:3000`
+
+### 3. Stack Completa com Observabilidade
+
+```bash
+# Inicie todos os serviços
+docker-compose up -d
+
+# Acesse os serviços:
+# Frontend: http://localhost:4200
+# API: http://localhost:3000
+# Swagger Docs: http://localhost:3000/api-docs
+# PgAdmin: http://localhost:5050
+# Grafana: http://localhost:3001
+# Jaeger: http://localhost:16686
+# Prometheus: http://localhost:9090
+```
+
+## 🛠️ Comandos Disponíveis
+
+### Desenvolvimento
+
+```bash
+npm run dev              # Frontend + Backend
+npm run dev:api          # Apenas API  
+npm run dev:web          # Apenas Frontend
+npm run build            # Build completo
+npm run start            # Start produção
+```
+
+### Testes
+
+```bash
+npm run test             # Todos os testes
+npm run test:api         # Testes da API
+npm run test:web         # Testes do frontend
+npm run test:watch       # Modo watch
+```
+
+### Qualidade de Código
+
+```bash
+npm run lint             # Verificar problemas
+npm run lint:fix         # Corrigir automaticamente
+npm run audit:security   # Verificar vulnerabilidades
+```
+
+### Database (quando implementado)
+
+```bash
+npm run db:migrate       # Executar migrações
+npm run db:seed          # Popular dados de teste
+npm run db:reset         # Reset completo
+```
+
+### Docker
+
+```bash
+docker-compose up -d     # Iniciar todos os serviços
+docker-compose down      # Parar todos os serviços
+docker-compose logs api  # Ver logs da API
+docker-compose logs web  # Ver logs do frontend
+```
+
+## 📁 Estrutura do Projeto
+
+```
+📦 monorepo-ngxp-starter/
+├── 📁 apps/
+│   ├── 📁 api/              # Backend Node.js + Express + TypeScript
+│   │   ├── 📁 src/
+│   │   │   ├── 📁 controllers/   # Controladores da API
+│   │   │   ├── 📁 services/      # Lógica de negócio
+│   │   │   ├── 📁 middleware/    # Middlewares Express
+│   │   │   ├── 📁 validators/    # Validação de dados
+│   │   │   └── server.ts         # Configuração do servidor
+│   │   └── package.json
+│   └── 📁 web/              # Frontend Angular
+│       ├── 📁 src/
+│       │   ├── 📁 app/           # Componentes Angular
+│       │   ├── 📁 environments/  # Configurações de ambiente
+│       │   └── main.ts           # Bootstrap da aplicação
+│       └── package.json
+├── 📁 libs/                 # Bibliotecas compartilhadas
+│   ├── 📁 config/              # Configurações
+│   ├── 📁 database/            # ORM e entidades
+│   └── 📁 logger/              # Sistema de logs
+├── 📁 docs/                 # Documentação
+├── docker-compose.yml       # Stack completa
+└── package.json            # Configuração do monorepo
+```
+
+## 🧪 Funcionalidades Implementadas
+
+### ✅ Backend (API)
+
+- [x] Servidor Express com TypeScript
+- [x] Documentação Swagger/OpenAPI automática
+- [x] Validação de dados com Joi
+- [x] Sistema de logs estruturados
+- [x] Middleware de tratamento de erros
+- [x] Health check endpoint
+- [x] Configuração flexível por variáveis de ambiente
+- [x] Testes unitários com Jest
+- [x] Hot reload para desenvolvimento
+
+### ✅ Frontend (Angular)
+
+- [x] Angular 20 com TypeScript
+- [x] Configuração de build otimizada
+- [x] Testes unitários com Jasmine/Karma
+- [x] Hot reload para desenvolvimento
+- [x] Configuração de ambientes
+- [x] ESLint configurado
+
+### ✅ Database & ORM
+
+- [x] PostgreSQL como banco principal
+- [x] Sequelize ORM com TypeScript
+- [x] Entidades User e Role configuradas
+- [x] Migrações automáticas (em implementação)
+
+### ✅ Observabilidade
+
+- [x] Logs estruturados com Pino
+- [x] Métricas com Prometheus
+- [x] Tracing distribuído com Jaeger
+- [x] Dashboards com Grafana
+- [x] Agregação de logs com Loki
+
+### ✅ DevOps & Infraestrutura
+
+- [x] Containerização completa com Docker
+- [x] Docker Compose para desenvolvimento
+- [x] Configuração de ambiente flexível
+- [x] Scripts automatizados
+
+## 🚧 Em Desenvolvimento
+
+### Próximas Funcionalidades
+
+- [ ] 🔐 Sistema de autenticação JWT
+- [ ] 📝 CRUD completo para usuários
+- [ ] 🔄 Comunicação Frontend-Backend integrada
+- [ ] 🧪 Testes de integração end-to-end
+- [ ] 🎨 Componentes UI mais robustos
+- [ ] 📊 Dashboard administrativo
+- [ ] 🔍 Sistema de busca e filtros
+- [ ] 📈 Métricas de negócio
 
 ## 🐳 DevContainer (Recomendado)
 
